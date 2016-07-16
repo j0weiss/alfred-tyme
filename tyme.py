@@ -53,8 +53,13 @@ def main(wf):
 	elif args.statistics:
 		wf.add_item(title=get_daily_total(),
 					subtitle='Daily Total',
-					valid=False,
-					icon=ICON_INFO)
+					valid=False)
+		daily_records = get_daily_records()
+		for record in daily_records:
+			wf.add_item(title=record['taskname'],
+						subtitle=str(datetime.timedelta(seconds=record['duration'])),
+						valid=False,
+						icon=ICON_INFO)
 	else:
 		for task in tasks:
 			# check if task is active and set corresponding icon		
@@ -81,6 +86,8 @@ def parse_args():
                         help='show active tasks only')
     parser.add_argument('-stats', '--statistics', action='store_true',
                         help='show todays statistics')
+    parser.add_argument('-t', '--test', action='store_true',
+                        help='test functionality')
     parser.add_argument('query', type=unicode, nargs=argparse.REMAINDER, help='query string')
     log.debug(wf.args)
     args = parser.parse_args(wf.args)

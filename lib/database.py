@@ -2,6 +2,7 @@
 # encoding: utf-8
 
 import subprocess
+from subprocess import Popen, PIPE
 import re
 import json
 import datetime
@@ -78,3 +79,47 @@ def get_daily_total ():
 		'''])
 
 	return str(datetime.timedelta(seconds=float(daily_total)))
+
+
+def get_daily_records ():
+	api_daily_record_ids = subprocess.check_output(['osascript', '-e', r'''
+		tell application "Tyme2"
+			set nowInSeconds to the time of the (current date)
+			-- start of the working day is currently at 6 o'clock
+			set secondsSinceWorkingDayStart to (nowInSeconds - 60 * 60 * 6)
+			
+			set now to current date
+			
+			GetTaskRecordIDs startDate (now - secondsSinceWorkingDayStart) endDate now
+			return fetchedTaskRecordIDs
+		end tell
+		'''])
+
+	daily_record_ids = []
+	for recordID in re.findall("[A-Z0-9-]+", api_daily_record_ids):
+		daily_record_ids.append(recordID)
+
+	daily_records = []
+	for recordID in daily_record_ids:
+		p = Popen(['osascript', '-e', r'''
+			on run argv
+				set theID to item 1 of argv
+				tell application "Tyme2"
+					GetRecordWithID theID
+					set theStart to the timeStart of the lastFetchedTaskRecord
+					set theEnd to the timeEnd of the lastFetchedTaskRecord
+					set theTaskDuration to (theEnd - theStart)
+					
+					set theID to the relatedTaskID of lastFetchedTaskRecord
+					set theTask to the first item of (every task of every project whose id = theID)
+					set theTaskName to the name of theTask
+					
+					return "{\"taskname\":\"" & theTaskName & "\", \"duration\":" & theTaskDuration & "}"
+				end tell
+			end run
+			''', recordID], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+		stdout, stderr = p.communicate()
+
+		daily_records.append(json.loads(stdout))
+
+	return daily_records
