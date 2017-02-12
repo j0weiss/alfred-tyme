@@ -1,4 +1,3 @@
 *.pyc
 
-icon.png
-info.plist
+utilities/
