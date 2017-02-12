@@ -2,6 +2,7 @@
 # encoding: utf-8
 
 import sys
+import argparse
 
 from workflow import Workflow, ICON_CLOCK, ICON_SYNC, ICON_NOTE, ICON_INFO
 
@@ -80,8 +81,8 @@ def parse_args():
     parser.add_argument('-t', '--test', action='store_true',
                         help='test functionality')
     parser.add_argument('query', type=unicode, nargs=argparse.REMAINDER, help='query string')
-    log.debug(wf.args)
-    args = parser.parse_args(wf.args)
+    log.debug(workflow.args)
+    args = parser.parse_args(workflow.args)
     return args
 
 
