@@ -56,17 +56,17 @@ def main(wf):
                         icon=ICON_INFO)
     else:
         for task in tasks:
-            # check if task is active and set corresponding icon
+            icon = None
             if task['id'] in active_tasks:
-                ICON = ICON_SYNC
+                icon = ICON_SYNC
             else:
-                ICON = ICON_CLOCK
+                icon = ICON_CLOCK
 
             wf.add_item(title=task['task'],
                         subtitle=task['project'],
                         arg=task['id'],
                         valid=True,
-                        icon=ICON)
+                        icon=icon)
 
     # Send the results to Alfred as XML
     wf.send_feedback()
