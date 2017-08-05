@@ -1,16 +1,13 @@
 #!/usr/bin/python
 # encoding: utf-8
 
-import subprocess
-from subprocess import Popen, PIPE
-import re
-import json
 import datetime
+import applescript
 
 
 def get_tasks():
-    apiData = subprocess.check_output(['osascript', '-e', r'''
-        set taskList to {"\n"}
+    scpt = applescript.AppleScript('''
+        set taskList to {}
 
         tell application "Tyme2"
             set projectList to every project
@@ -20,45 +17,37 @@ def get_tasks():
                     set tName to the name of t
                     set tID to the the id of t
                     set pName to the name of p
-                    set newTask to {taskName:tName, taskID:tID, projectName:pName}
+                    set newTask to {task_name:tName, task_id:tID, project_name:pName}
                     copy newTask to end of taskList
-                    copy "\n" to end of taskList
                 end repeat
             end repeat
         end tell
 
-        return taskList'''])
+        return taskList
+    ''')
 
-    data = []
-    for item in re.findall("taskName:.+?, taskID:.+?, projectName:.+", apiData):
-        task_name = re.findall("(?<=taskName:)(.+?)(?=,)", item)[0]
-        task_id = re.findall("(?<=taskID:)([A-Z0-9-]+)(?=,)", item)[0]
-        project_name = re.findall("(?<=projectName:)(.+?)(?=,)", item)[0]
+    tasks = scpt.run()
 
-        json_string = '{"task": "' + task_name + '"' + ', "id": "' + task_id + '"' + ', "project": "' + project_name + '"}'
+    for task in tasks:
+        task["task"] = task.pop("task_name")
+        task["id"] = task.pop("task_id")
+        task["project"] = task.pop("project_name")
 
-        # print json_string
-        data.append(json.loads(json_string))
-
-    return data
+    return tasks
 
 
 def get_active_tasks():
-    api_active_tasks = subprocess.check_output(['osascript', '-e', r'''
+    scpt = applescript.AppleScript('''
         tell application "Tyme2"
             set trackedTasks to trackedTaskIDs
         end tell
-        '''])
+        ''')
 
-    active_tasks = []
-    for taskID in re.findall("[A-Z0-9-]+", api_active_tasks):
-        active_tasks.append(taskID)
-
-    return active_tasks
+    return scpt.run()
 
 
 def get_daily_total():
-    daily_total = subprocess.check_output(['osascript', '-e', r'''
+    scpt = applescript.AppleScript('''
         tell application "Tyme2"
             set nowInSeconds to the time of the (current date)
             -- start of the working day is currently at 6 o'clock
@@ -77,13 +66,15 @@ def get_daily_total():
 
             return todaysDuration
         end tell
-        '''])
+        ''')
+
+    daily_total = scpt.run()
 
     return str(datetime.timedelta(seconds=float(daily_total)))
 
 
 def get_daily_records():
-    api_daily_record_ids = subprocess.check_output(['osascript', '-e', r'''
+    scpt = applescript.AppleScript('''
         tell application "Tyme2"
             set nowInSeconds to the time of the (current date)
             -- start of the working day is currently at 6 o'clock
@@ -94,17 +85,14 @@ def get_daily_records():
             GetTaskRecordIDs startDate (now - secondsSinceWorkingDayStart) endDate now
             return fetchedTaskRecordIDs
         end tell
-        '''])
+        ''')
 
-    daily_record_ids = []
-    for recordID in re.findall("[A-Z0-9-]+", api_daily_record_ids):
-        daily_record_ids.append(recordID)
+    daily_record_ids = scpt.run()
 
     daily_records = []
     for recordID in daily_record_ids:
-        p = Popen(['osascript', '-e', r'''
-            on run argv
-                set theID to item 1 of argv
+        scpt = applescript.AppleScript('''
+            on run {theID}
                 tell application "Tyme2"
                     GetRecordWithID theID
                     set theStart to the timeStart of the lastFetchedTaskRecord
@@ -115,12 +103,11 @@ def get_daily_records():
                     set theTask to the first item of (every task of every project whose id = theID)
                     set theTaskName to the name of theTask
 
-                    return "{\"taskname\":\"" & theTaskName & "\", \"duration\":" & theTaskDuration & "}"
+                    return {taskname:theTaskName, duration:theTaskDuration}
                 end tell
             end run
-            ''', recordID], stdin=PIPE, stdout=PIPE, stderr=PIPE)
-        stdout, stderr = p.communicate()
+            ''')
 
-        daily_records.append(json.loads(stdout))
+        daily_records.append(scpt.run(recordID))
 
     return daily_records
