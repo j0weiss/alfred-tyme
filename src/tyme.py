@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # encoding: utf-8
 
+import os
 import sys
 import argparse
 
@@ -28,7 +29,7 @@ def main(wf):
     active_tasks = get_active_tasks()
 
     # if query is given, filter posts
-    if query:
+    if query and not args.note:
         tasks = wf.filter(query, tasks, key=search_tasks_and_projects)
 
     # loop through the tasks and add an item for each to the list of results for Alfred
@@ -36,6 +37,7 @@ def main(wf):
             wf.add_item(title="There are no active tasks",
                         valid=False,
                         icon=ICON_NOTE)
+
     elif args.active:
         for task in tasks:
             if task['id'] in active_tasks:
@@ -44,6 +46,12 @@ def main(wf):
                             arg=task['id'],
                             valid=True,
                             icon=ICON_SYNC)
+
+    elif args.note:
+        task_id = os.environ['taskID']
+        note = os.environ['note']
+        set_note(task_id, note)
+
     elif args.statistics:
         wf.add_item(title=get_daily_total(),
                     subtitle='Daily Total',
@@ -54,6 +62,7 @@ def main(wf):
                         subtitle=str(datetime.timedelta(seconds=record['duration'])),
                         valid=False,
                         icon=ICON_INFO)
+
     else:
         for task in tasks:
             icon = None
@@ -74,11 +83,20 @@ def main(wf):
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-a', '--active', action='store_true',
+    parser.add_argument('-a',
+                        '--active',
+                        action='store_true',
                         help='show active tasks only')
-    parser.add_argument('-stats', '--statistics', action='store_true',
+    parser.add_argument('--note',
+                        action='store_true',
+                        help='add a note to selected task')
+    parser.add_argument('--statistics',
+                        action='store_true',
                         help='show todays statistics')
-    parser.add_argument('query', type=unicode, nargs=argparse.REMAINDER, help='query string')
+    parser.add_argument('query',
+                        type=unicode,
+                        nargs=argparse.REMAINDER,
+                        help='query string')
     log.debug(workflow.args)
     args = parser.parse_args(workflow.args)
     return args

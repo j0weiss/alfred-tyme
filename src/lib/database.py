@@ -108,6 +108,29 @@ def get_daily_records():
             end run
             ''')
 
-        daily_records.append(scpt.run(recordID))
+        daily_records.append(daily_records_script.run(recordID))
 
     return daily_records
+
+
+def set_note(task_id, note):
+    set_note_script = applescript.AppleScript('''
+        on run {theID, theNote}
+            tell application "Tyme2"
+                set theTask to the first item of (every task of every project whose id = theID)
+                set theRecords to every taskRecord of theTask
+
+                repeat with theRecord in theRecords
+                    set theRecordTimeEnd to timeEnd of theRecord
+                    log theRecordTimeEnd
+                end repeat
+
+                set theCurrentRecord to the last item of theRecords
+                set theCurrentRecordTimeEnd to timeEnd of theCurrentRecord
+                log theCurrentRecordTimeEnd
+                set the properties of theCurrentRecord to {note:theNote}
+            end tell
+        end run
+    ''')
+
+    set_note_script.run(task_id, note)

@@ -8,6 +8,8 @@
 	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
+		<key>18C8A62C-85EF-49C6-B0AE-640E1F378566</key>
+		<array/>
 		<key>213980C6-0DA8-4596-8433-CDCD6AA2D07F</key>
 		<array>
 			<dict>
@@ -26,6 +28,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>213980C6-0DA8-4596-8433-CDCD6AA2D07F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>2E5852BF-1545-40B1-AD0F-5D8935B1A03D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A3626BE6-B435-4213-828E-2B4421AF6ED1</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -83,6 +98,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>6B02EBC5-1215-4586-9709-B23A36F23CB5</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>18C8A62C-85EF-49C6-B0AE-640E1F378566</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>72FE093B-725F-4B84-B281-BE5AB761A7CC</key>
 		<array/>
 		<key>8CDB82D7-683A-4492-872D-7A93364371E9</key>
@@ -103,6 +131,32 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>CA7EC2FA-D894-45B4-A05A-33890B1AE36C</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A3626BE6-B435-4213-828E-2B4421AF6ED1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6B02EBC5-1215-4586-9709-B23A36F23CB5</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A863B17F-311D-4E9A-9A23-2456149832B3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>2E5852BF-1545-40B1-AD0F-5D8935B1A03D</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -138,31 +192,31 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>set taskID to "{query}"set theResult to ""tell application "Tyme2"	set taskIsActive to (trackedTaskIDs contains taskID)		if taskIsActive then		StopTrackerForTaskID taskID		set theResult to theResult &amp; "Stopped active task: "	else		StartTrackerForTaskID taskID		set theResult to theResult &amp; "Started task: "	end if			set theTask to the first item of (every task of every project whose id = taskID)	set taskName to the name of theTask		set theResult to theResult &amp; taskName	return theResultend tell</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Tyme</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>C251EAA3-D455-426B-BC5B-57D7306C0262</string>
+			<string>CA7EC2FA-D894-45B4-A05A-33890B1AE36C</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
@@ -204,50 +258,31 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>concurrently</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>Tyme</string>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>set taskID to "{query}"set theResult to ""tell application "Tyme2"	set taskIsActive to (trackedTaskIDs contains taskID)		if taskIsActive then		StopTrackerForTaskID taskID		set theResult to theResult &amp; "Stopped active task: "	else		StartTrackerForTaskID taskID		set theResult to theResult &amp; "Started task: "	end if			set theTask to the first item of (every task of every project whose id = taskID)	set taskName to the name of theTask		set theResult to theResult &amp; taskName	return theResultend tell</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>CA7EC2FA-D894-45B4-A05A-33890B1AE36C</string>
+			<string>C251EAA3-D455-426B-BC5B-57D7306C0262</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.junction</string>
 			<key>uid</key>
 			<string>90CE04ED-1FAB-490C-AD37-698B7A34DBEF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>Tyme</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>915CA066-11B9-48E8-99E4-0FE6CE0E7836</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -280,45 +315,23 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
+				<key>lastpathcomponent</key>
 				<false/>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>tya</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Fetching tasks ...</string>
-				<key>script</key>
-				<string>/usr/bin/python tyme.py -a "{query}"</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
 				<key>title</key>
-				<string>Track active tasks in Tyme</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
+				<string>Tyme</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>2AEF3C25-FD9D-4762-856B-10FD70037C4D</string>
+			<string>915CA066-11B9-48E8-99E4-0FE6CE0E7836</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -348,21 +361,191 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
+				<key>alfredfiltersresults</key>
 				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>Stopped all active tasks</string>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>tya</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Fetching tasks ...</string>
+				<key>script</key>
+				<string>/usr/bin/python tyme.py --active "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
 				<key>title</key>
-				<string>Tyme</string>
+				<string>Track active tasks in Tyme</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>C9790245-5CCA-410B-B92D-58A57958ED47</string>
+			<string>2AEF3C25-FD9D-4762-856B-10FD70037C4D</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>tynote</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>/usr/bin/python tyme.py "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>Add a note to a task</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>A863B17F-311D-4E9A-9A23-2456149832B3</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>-&gt;tynote</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Write your note</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>A3626BE6-B435-4213-828E-2B4421AF6ED1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>/usr/bin/python tyme.py --note</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>18C8A62C-85EF-49C6-B0AE-640E1F378566</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>variables</key>
+				<dict>
+					<key>note</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>6B02EBC5-1215-4586-9709-B23A36F23CB5</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>variables</key>
+				<dict>
+					<key>taskID</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>2E5852BF-1545-40B1-AD0F-5D8935B1A03D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>tyst</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Stop all active tasks</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>8CDB82D7-683A-4492-872D-7A93364371E9</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -392,21 +575,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>tyst</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Stop all active tasks</string>
-				<key>withspace</key>
+				<key>lastpathcomponent</key>
 				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>Stopped all active tasks</string>
+				<key>title</key>
+				<string>Tyme</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>8CDB82D7-683A-4492-872D-7A93364371E9</string>
+			<string>C9790245-5CCA-410B-B92D-58A57958ED47</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -415,6 +598,8 @@
 			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>escaping</key>
@@ -432,7 +617,7 @@
 				<key>runningsubtext</key>
 				<string>Fetching information ...</string>
 				<key>script</key>
-				<string>/usr/bin/python tyme.py -stats</string>
+				<string>/usr/bin/python tyme.py --statistics</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -458,6 +643,13 @@
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>18C8A62C-85EF-49C6-B0AE-640E1F378566</key>
+		<dict>
+			<key>xpos</key>
+			<integer>710</integer>
+			<key>ypos</key>
+			<integer>430</integer>
+		</dict>
 		<key>213980C6-0DA8-4596-8433-CDCD6AA2D07F</key>
 		<dict>
 			<key>xpos</key>
@@ -472,12 +664,19 @@
 			<key>ypos</key>
 			<integer>280</integer>
 		</dict>
+		<key>2E5852BF-1545-40B1-AD0F-5D8935B1A03D</key>
+		<dict>
+			<key>xpos</key>
+			<integer>310</integer>
+			<key>ypos</key>
+			<integer>460</integer>
+		</dict>
 		<key>35C1787F-94C0-40AE-9686-1B78E62CE88C</key>
 		<dict>
 			<key>xpos</key>
 			<integer>390</integer>
 			<key>ypos</key>
-			<integer>430</integer>
+			<integer>580</integer>
 		</dict>
 		<key>45CF32CA-8896-4267-BFE6-2C62451387D0</key>
 		<dict>
@@ -493,19 +692,26 @@
 			<key>ypos</key>
 			<integer>10</integer>
 		</dict>
+		<key>6B02EBC5-1215-4586-9709-B23A36F23CB5</key>
+		<dict>
+			<key>xpos</key>
+			<integer>560</integer>
+			<key>ypos</key>
+			<integer>460</integer>
+		</dict>
 		<key>72FE093B-725F-4B84-B281-BE5AB761A7CC</key>
 		<dict>
 			<key>xpos</key>
 			<integer>150</integer>
 			<key>ypos</key>
-			<integer>590</integer>
+			<integer>730</integer>
 		</dict>
 		<key>8CDB82D7-683A-4492-872D-7A93364371E9</key>
 		<dict>
 			<key>xpos</key>
 			<integer>150</integer>
 			<key>ypos</key>
-			<integer>430</integer>
+			<integer>580</integer>
 		</dict>
 		<key>90CE04ED-1FAB-490C-AD37-698B7A34DBEF</key>
 		<dict>
@@ -521,6 +727,20 @@
 			<key>ypos</key>
 			<integer>140</integer>
 		</dict>
+		<key>A3626BE6-B435-4213-828E-2B4421AF6ED1</key>
+		<dict>
+			<key>xpos</key>
+			<integer>390</integer>
+			<key>ypos</key>
+			<integer>430</integer>
+		</dict>
+		<key>A863B17F-311D-4E9A-9A23-2456149832B3</key>
+		<dict>
+			<key>xpos</key>
+			<integer>150</integer>
+			<key>ypos</key>
+			<integer>430</integer>
+		</dict>
 		<key>C251EAA3-D455-426B-BC5B-57D7306C0262</key>
 		<dict>
 			<key>xpos</key>
@@ -531,9 +751,9 @@
 		<key>C9790245-5CCA-410B-B92D-58A57958ED47</key>
 		<dict>
 			<key>xpos</key>
-			<integer>720</integer>
+			<integer>710</integer>
 			<key>ypos</key>
-			<integer>430</integer>
+			<integer>580</integer>
 		</dict>
 		<key>CA7EC2FA-D894-45B4-A05A-33890B1AE36C</key>
 		<dict>
