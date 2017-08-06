@@ -78,8 +78,6 @@ def parse_args():
                         help='show active tasks only')
     parser.add_argument('-stats', '--statistics', action='store_true',
                         help='show todays statistics')
-    parser.add_argument('-t', '--test', action='store_true',
-                        help='test functionality')
     parser.add_argument('query', type=unicode, nargs=argparse.REMAINDER, help='query string')
     log.debug(workflow.args)
     args = parser.parse_args(workflow.args)
