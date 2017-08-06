@@ -1,12 +1,12 @@
 
 # Alfred-Tyme
 
-A simple workflow for [Alfred 2/3](alfred) to control [Tyme](tyme).
+A simple workflow for [Alfred 2/3](http://www.alfredapp.com/) to control [Tyme](http://tyme-app.com).
 
 Until now, this workflow is used primarily by me and it is therefore far from being without bugs etc.
 Feel free to use it but use with caution.
 
-Built with the awesome [Alfred-Workflow](alfred-workflow) library (MIT-licensed).
+Built with the awesome [Alfred-Workflow](https://github.com/deanishe/alfred-workflow) library (MIT-licensed).
 
 
 ## Features and Usage
@@ -32,12 +32,6 @@ Some ideas I plan to include:
 
 ## Licence
 
-This code is licensed under the [MIT Licence](mit).
+This code is licensed under the [MIT Licence](https://opensource.org/licenses/MIT).
 
-The icon belongs to and is used here with the permission of [Tyme](tyme).
-
-
-[alfred]: http://www.alfredapp.com/
-[tyme]: http://tyme-app.com
-[alfred-workflow]: https://github.com/deanishe/alfred-workflow
-[mit]: https://opensource.org/licenses/MIT
+The icon belongs to and is used here with the permission of [Tyme](http://tyme-app.com).
