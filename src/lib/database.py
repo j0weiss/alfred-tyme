@@ -6,7 +6,7 @@ import applescript
 
 
 def get_tasks():
-    scpt = applescript.AppleScript('''
+    get_tasks_script = applescript.AppleScript('''
         set taskList to {}
 
         tell application "Tyme2"
@@ -26,7 +26,7 @@ def get_tasks():
         return taskList
     ''')
 
-    tasks = scpt.run()
+    tasks = get_tasks_script.run()
 
     for task in tasks:
         task["task"] = task.pop("task_name")
@@ -37,17 +37,17 @@ def get_tasks():
 
 
 def get_active_tasks():
-    scpt = applescript.AppleScript('''
+    get_active_tasks_script = applescript.AppleScript('''
         tell application "Tyme2"
             set trackedTasks to trackedTaskIDs
         end tell
         ''')
 
-    return scpt.run()
+    return get_active_tasks_script.run()
 
 
 def get_daily_total():
-    scpt = applescript.AppleScript('''
+    daily_total_script = applescript.AppleScript('''
         tell application "Tyme2"
             set nowInSeconds to the time of the (current date)
             -- start of the working day is currently at 6 o'clock
@@ -68,13 +68,13 @@ def get_daily_total():
         end tell
         ''')
 
-    daily_total = scpt.run()
+    daily_total = daily_total_script.run()
 
     return str(datetime.timedelta(seconds=float(daily_total)))
 
 
 def get_daily_records():
-    scpt = applescript.AppleScript('''
+    daily_record_ids_script = applescript.AppleScript('''
         tell application "Tyme2"
             set nowInSeconds to the time of the (current date)
             -- start of the working day is currently at 6 o'clock
@@ -87,11 +87,11 @@ def get_daily_records():
         end tell
         ''')
 
-    daily_record_ids = scpt.run()
+    daily_record_ids = daily_record_ids_script.run()
 
     daily_records = []
     for recordID in daily_record_ids:
-        scpt = applescript.AppleScript('''
+        daily_records_script = applescript.AppleScript('''
             on run {theID}
                 tell application "Tyme2"
                     GetRecordWithID theID
