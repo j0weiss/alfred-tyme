@@ -6,6 +6,7 @@ import sys
 import argparse
 
 from workflow import Workflow, ICON_CLOCK, ICON_SYNC, ICON_NOTE, ICON_INFO
+from workflow.notify import notify
 
 from lib.database import *
 from lib.utils import *
@@ -29,7 +30,7 @@ def main(wf):
     active_tasks = get_active_tasks()
 
     # if query is given, filter posts
-    if query and not args.note:
+    if query and not args.note and not args.starttask:
         tasks = wf.filter(query, tasks, key=search_tasks_and_projects)
 
     # loop through the tasks and add an item for each to the list of results for Alfred
@@ -46,6 +47,17 @@ def main(wf):
                             arg=task['id'],
                             valid=True,
                             icon=ICON_SYNC)
+
+    elif args.starttask:
+        task_name = ""
+        task_name = get_task_name_of_id(query, tasks)
+
+        if query in active_tasks:
+            stop_task(query)
+            notify("Stop task", task_name)
+        else:
+            start_task(query)
+            notify("Start task", task_name)
 
     elif args.note:
         task_id = os.environ['taskID']
@@ -87,6 +99,9 @@ def parse_args():
                         '--active',
                         action='store_true',
                         help='show active tasks only')
+    parser.add_argument('--starttask',
+                        action='store_true',
+                        help='start given task')
     parser.add_argument('--note',
                         action='store_true',
                         help='add a note to selected task')

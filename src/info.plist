@@ -14,7 +14,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>90CE04ED-1FAB-490C-AD37-698B7A34DBEF</string>
+				<string>CA7EC2FA-D894-45B4-A05A-33890B1AE36C</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -62,6 +62,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>3D59C9BD-4B02-42F2-9E8B-9DC0E8C4CF85</key>
+		<array/>
 		<key>45CF32CA-8896-4267-BFE6-2C62451387D0</key>
 		<array>
 			<dict>
@@ -79,7 +81,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>C251EAA3-D455-426B-BC5B-57D7306C0262</string>
+				<string>3D59C9BD-4B02-42F2-9E8B-9DC0E8C4CF85</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -126,19 +128,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>90CE04ED-1FAB-490C-AD37-698B7A34DBEF</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>CA7EC2FA-D894-45B4-A05A-33890B1AE36C</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>A3626BE6-B435-4213-828E-2B4421AF6ED1</key>
 		<array>
 			<dict>
@@ -165,19 +154,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>C251EAA3-D455-426B-BC5B-57D7306C0262</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>90CE04ED-1FAB-490C-AD37-698B7A34DBEF</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Johannes Weiß</string>
@@ -189,27 +165,6 @@
 	<string>Tyme</string>
 	<key>objects</key>
 	<array>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>Tyme</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>CA7EC2FA-D894-45B4-A05A-33890B1AE36C</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -261,54 +216,20 @@
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
-				<integer>68</integer>
+				<integer>102</integer>
 				<key>script</key>
-				<string>set taskID to "{query}"set theResult to ""tell application "Tyme2"	set taskIsActive to (trackedTaskIDs contains taskID)		if taskIsActive then		StopTrackerForTaskID taskID		set theResult to theResult &amp; "Stopped active task: "	else		StartTrackerForTaskID taskID		set theResult to theResult &amp; "Started task: "	end if			set theTask to the first item of (every task of every project whose id = taskID)	set taskName to the name of theTask		set theResult to theResult &amp; taskName	return theResultend tell</string>
+				<string>/usr/bin/python tyme.py --starttask "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>type</key>
-				<integer>6</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>C251EAA3-D455-426B-BC5B-57D7306C0262</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.junction</string>
-			<key>uid</key>
-			<string>90CE04ED-1FAB-490C-AD37-698B7A34DBEF</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>68</integer>
-				<key>script</key>
-				<string>set taskID to "{query}"tell application "Tyme2"
-	set trackedTasks to trackedTaskIDs	repeat with tID in trackedTasks		StopTrackerForTaskID tID	end repeat		StartTrackerForTaskID taskID			set theTask to the first item of (every task of every project whose id = taskID)	set taskName to the name of theTask
-	
-	set theResult to "Stopped all active tasks and started task: " &amp; taskName	return theResultend tell</string>
-				<key>scriptargtype</key>
 				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>6</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>45CF32CA-8896-4267-BFE6-2C62451387D0</string>
+			<string>3D59C9BD-4B02-42F2-9E8B-9DC0E8C4CF85</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -341,9 +262,10 @@
 				<key>escaping</key>
 				<integer>68</integer>
 				<key>script</key>
-				<string>set taskID to "{query}"tell application "Tyme2"	StopTrackerForTaskID taskID			set theTask to the first item of (every task of every project whose id = taskID)	set taskName to the name of theTask
-
-	set theResult to "Stopped active task: " &amp; taskName	return theResultend tell</string>
+				<string>set taskID to "{query}"tell application "Tyme2"
+	set trackedTasks to trackedTaskIDs	repeat with tID in trackedTasks		StopTrackerForTaskID tID	end repeat		StartTrackerForTaskID taskID			set theTask to the first item of (every task of every project whose id = taskID)	set taskName to the name of theTask
+	
+	set theResult to "Stopped all active tasks and started task: " &amp; taskName	return theResultend tell</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -354,7 +276,7 @@
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>213980C6-0DA8-4596-8433-CDCD6AA2D07F</string>
+			<string>45CF32CA-8896-4267-BFE6-2C62451387D0</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -400,6 +322,75 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>2AEF3C25-FD9D-4762-856B-10FD70037C4D</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Tyme</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>CA7EC2FA-D894-45B4-A05A-33890B1AE36C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>set taskID to "{query}"tell application "Tyme2"	StopTrackerForTaskID taskID			set theTask to the first item of (every task of every project whose id = taskID)	set taskName to the name of theTask
+
+	set theResult to "Stopped active task: " &amp; taskName	return theResultend tell</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>213980C6-0DA8-4596-8433-CDCD6AA2D07F</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>/usr/bin/python tyme.py --note</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>18C8A62C-85EF-49C6-B0AE-640E1F378566</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -472,29 +463,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>/usr/bin/python tyme.py --note</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>18C8A62C-85EF-49C6-B0AE-640E1F378566</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argument</key>
 				<string></string>
 				<key>variables</key>
@@ -531,21 +499,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>tyst</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Stop all active tasks</string>
-				<key>withspace</key>
+				<key>lastpathcomponent</key>
 				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>Stopped all active tasks</string>
+				<key>title</key>
+				<string>Tyme</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
+			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
-			<string>8CDB82D7-683A-4492-872D-7A93364371E9</string>
+			<string>C9790245-5CCA-410B-B92D-58A57958ED47</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -575,21 +543,21 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>tyst</string>
+				<key>subtext</key>
+				<string></string>
 				<key>text</key>
-				<string>Stopped all active tasks</string>
-				<key>title</key>
-				<string>Tyme</string>
+				<string>Stop all active tasks</string>
+				<key>withspace</key>
+				<false/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
+			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
-			<string>C9790245-5CCA-410B-B92D-58A57958ED47</string>
+			<string>8CDB82D7-683A-4492-872D-7A93364371E9</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -678,6 +646,13 @@
 			<key>ypos</key>
 			<integer>580</integer>
 		</dict>
+		<key>3D59C9BD-4B02-42F2-9E8B-9DC0E8C4CF85</key>
+		<dict>
+			<key>xpos</key>
+			<integer>390</integer>
+			<key>ypos</key>
+			<integer>10</integer>
+		</dict>
 		<key>45CF32CA-8896-4267-BFE6-2C62451387D0</key>
 		<dict>
 			<key>xpos</key>
@@ -713,13 +688,6 @@
 			<key>ypos</key>
 			<integer>580</integer>
 		</dict>
-		<key>90CE04ED-1FAB-490C-AD37-698B7A34DBEF</key>
-		<dict>
-			<key>xpos</key>
-			<integer>590</integer>
-			<key>ypos</key>
-			<integer>40</integer>
-		</dict>
 		<key>915CA066-11B9-48E8-99E4-0FE6CE0E7836</key>
 		<dict>
 			<key>xpos</key>
@@ -741,13 +709,6 @@
 			<key>ypos</key>
 			<integer>430</integer>
 		</dict>
-		<key>C251EAA3-D455-426B-BC5B-57D7306C0262</key>
-		<dict>
-			<key>xpos</key>
-			<integer>390</integer>
-			<key>ypos</key>
-			<integer>10</integer>
-		</dict>
 		<key>C9790245-5CCA-410B-B92D-58A57958ED47</key>
 		<dict>
 			<key>xpos</key>
@@ -760,7 +721,7 @@
 			<key>xpos</key>
 			<integer>720</integer>
 			<key>ypos</key>
-			<integer>10</integer>
+			<integer>280</integer>
 		</dict>
 	</dict>
 	<key>webaddress</key>

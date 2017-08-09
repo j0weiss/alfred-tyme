@@ -5,6 +5,36 @@ import datetime
 import applescript
 
 
+def start_task(query):
+    start_task_script = applescript.AppleScript('''
+        on run {taskID}
+            tell application "Tyme2"
+                StartTrackerForTaskID taskID
+            end tell
+        end run
+    ''')
+
+    start_task_script.run(query)
+
+
+def stop_task(query):
+    stop_task_script = applescript.AppleScript('''
+        on run {taskID}
+            tell application "Tyme2"
+                StopTrackerForTaskID taskID
+            end tell
+        end run
+    ''')
+
+    stop_task_script.run(query)
+
+
+def get_task_name_of_id(task_id, tasks):
+    for task in tasks:
+        if task['id'] == task_id:
+            return task['task']
+
+
 def get_tasks():
     get_tasks_script = applescript.AppleScript('''
         set taskList to {}
