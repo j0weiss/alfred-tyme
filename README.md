@@ -1,6 +1,8 @@
 
 # Alfred-Tyme
 
+<a href="https://github.com/j0weiss/alfred-tyme/releases"><img src="https://img.shields.io/github/release/j0weiss/alfred-tyme.svg" alt="Release"></a>
+
 A simple workflow for [Alfred 2/3](http://www.alfredapp.com/) to control [Tyme](http://tyme-app.com).
 
 Until now, this workflow is used primarily by me and it is therefore far from being without bugs etc.
